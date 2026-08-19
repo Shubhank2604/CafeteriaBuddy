@@ -1,0 +1,42 @@
+meal: lunch
+headings:
+  - CHEF'S TABLE
+  - SALAD & ANTIPASTI
+  - HEARTH
+  - SEASONAL
+  - GRILL
+  - SOUP
+  - SPECIALITY SANDWICHES
+ignore_text_contains:
+  - Café
+  - LUNCH SPECIALS
+  - For more information
+description_sections:
+  - SPECIALITY SANDWICHES
+regions:
+  CHEF'S TABLE:
+    x_min: 0.00
+    x_max: 0.34
+    y_max_heading: SALAD & ANTIPASTI
+  SALAD & ANTIPASTI:
+    x_min: 0.00
+    x_max: 0.34
+  HEARTH:
+    x_min: 0.32
+    x_max: 0.67
+    y_max_heading: SEASONAL
+  SEASONAL:
+    x_min: 0.32
+    x_max: 0.67
+    y_max_heading: SPECIALITY SANDWICHES
+  GRILL:
+    x_min: 0.66
+    x_max: 1.00
+    y_max_heading: SOUP
+  SOUP:
+    x_min: 0.66
+    x_max: 1.00
+    y_max_heading: SPECIALITY SANDWICHES
+  SPECIALITY SANDWICHES:
+    x_min: 0.32
+    x_max: 1.00

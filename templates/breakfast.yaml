@@ -1,0 +1,24 @@
+meal: breakfast
+headings:
+  - FRUIT AND YOGURT BAR
+  - BREAKFAST BAR
+  - CEREAL
+  - TOAST AND SPREADS
+ignore_text_contains:
+  - Café
+  - BREAKFAST SPECIALS
+  - For more information
+regions:
+  FRUIT AND YOGURT BAR:
+    x_min: 0.00
+    x_max: 0.34
+  BREAKFAST BAR:
+    x_min: 0.32
+    x_max: 0.68
+    y_max_heading: CEREAL
+  CEREAL:
+    x_min: 0.32
+    x_max: 0.68
+  TOAST AND SPREADS:
+    x_min: 0.66
+    x_max: 1.00
