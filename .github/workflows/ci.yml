@@ -46,7 +46,7 @@ jobs:
       AUTH_SECRET: ci-only-secret-never-use-in-production
       ADMIN_EMAIL: ci.admin@example.com
       ADMIN_PASSWORD: ci-only-password
-      DATABASE_PATH: ${{ runner.temp }}/menu-match.db
+      DATABASE_PATH: ./data/ci-menu-match.db
       DIGEST_SCHEDULER: "0"
       OCR_PROVIDER: local
       LLM_PROVIDER: stub
