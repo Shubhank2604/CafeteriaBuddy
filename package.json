@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "dev:clean": "rm -rf .next && next dev",
+    "demo": "node scripts/create-demo-env.mjs && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
