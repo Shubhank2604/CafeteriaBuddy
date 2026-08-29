@@ -203,6 +203,10 @@ export const ALLERGY_FAMILIES: Record<string, string[]> = {
     "whey",
     "casein",
   ],
+  milk: [
+    "milk", "dairy", "cheese", "yogurt", "yoghurt", "curd", "butter",
+    "cream", "paneer", "lactose", "whey", "casein",
+  ],
   nuts: [
     "nut",
     "nuts",
@@ -259,7 +263,6 @@ export function dishHitsTerm(
   if (family) {
     for (const w of family) {
       if (tagSet.has(w)) return true;
-      if (name.includes(w)) return true;
       const re = new RegExp(
         `(^|[^a-z])${w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}([^a-z]|$)`,
         "i"
@@ -285,7 +288,6 @@ export function dishHitsTerm(
       "i"
     );
     if (re.test(name)) return true;
-    if (name.includes(v)) return true;
   }
 
   return false;
