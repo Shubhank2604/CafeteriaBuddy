@@ -164,6 +164,10 @@ GitHub Actions runs these checks for every pull request to `main`. The test conf
 
 The versioned 36-case benchmark reports `1.000` recall and `0.714` precision. The matcher intentionally favors recall, so ambiguous names can be conservatively excluded. See [the methodology and known false positives](docs/safety-evaluation.md). This evaluates rule matching, not medical safety or ingredient completeness.
 
+### Menu-parser baseline
+
+The deterministic parser correctly recovers all 11 station headings and all 55 item/station labels from the versioned breakfast and lunch fixture text. CI requires item/station recall of at least `0.98`. See [the parsing evaluation](docs/parsing-evaluation.md) for the dataset, command, and limitations. This measures parsing after text extraction; it does not measure Azure OCR accuracy or performance on unseen menu layouts.
+
 ## Project structure
 
 ```text
