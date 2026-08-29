@@ -38,6 +38,9 @@ jobs:
       - name: Run test suite
         run: python -m pytest -q
 
+      - name: Enforce menu parsing quality gate
+        run: python eval_parsing.py --min-item-recall 0.98 --output /tmp/parsing-report.json
+
   web:
     name: Web tests, lint, and build
     runs-on: ubuntu-latest

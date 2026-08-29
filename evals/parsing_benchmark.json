@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "id": "breakfast-layout-v1",
+      "meal": "breakfast",
+      "stations": ["FRUIT AND YOGURT BAR", "BREAKFAST BAR", "CEREAL", "TOAST AND SPREADS"],
+      "items": [
+        ["FRUIT AND YOGURT BAR", "Sliced Fruit"], ["FRUIT AND YOGURT BAR", "Jumbo Red Gem Grapes"], ["FRUIT AND YOGURT BAR", "Local Blueberries"], ["FRUIT AND YOGURT BAR", "Flavor Grenade Plumcots"], ["FRUIT AND YOGURT BAR", "Clementines"], ["FRUIT AND YOGURT BAR", "Royal Gala Apples"], ["FRUIT AND YOGURT BAR", "Bananas"], ["FRUIT AND YOGURT BAR", "Cottage Cheese"], ["FRUIT AND YOGURT BAR", "Hard Boiled Eggs"], ["FRUIT AND YOGURT BAR", "Plain Greek Yogurt"], ["FRUIT AND YOGURT BAR", "Vegan Coconut Yogurt"], ["FRUIT AND YOGURT BAR", "Strawberry Yogurt"],
+        ["BREAKFAST BAR", "Croissan'wich"], ["BREAKFAST BAR", "Sausage Patties"], ["BREAKFAST BAR", "Squash Blossom & Goat Cheese Frittata"], ["BREAKFAST BAR", "Banana Bread Pancakes"],
+        ["CEREAL", "Oatmeal"], ["CEREAL", "Granola"], ["CEREAL", "Quaker Life Cereal"], ["CEREAL", "Purely Elizabeth Granola"], ["CEREAL", "Special K with Red Berries"],
+        ["TOAST AND SPREADS", "Cream Cheese Biscuits"], ["TOAST AND SPREADS", "OMG! Garlic Bagels"], ["TOAST AND SPREADS", "OMG! Plain Bagels"], ["TOAST AND SPREADS", "Stone & Skillet English Muffins"], ["TOAST AND SPREADS", "Little Northern Bakehouse Gluten Free Wheat Bread"], ["TOAST AND SPREADS", "Whipped Cream Cheese"], ["TOAST AND SPREADS", "Veggie Cream Cheese"], ["TOAST AND SPREADS", "Vegan Cream Cheese"], ["TOAST AND SPREADS", "Assorted Jams"]
+      ]
+    },
+    {
+      "id": "lunch-layout-v1",
+      "meal": "lunch",
+      "stations": ["CHEF'S TABLE", "SALAD & ANTIPASTI", "HEARTH", "SEASONAL", "GRILL", "SOUP", "SPECIALITY SANDWICHES"],
+      "items": [
+        ["CHEF'S TABLE", "Chicken Scarpariello with Sausage"], ["CHEF'S TABLE", "Arancini alla Nonna with Pomodoro Sauce"], ["CHEF'S TABLE", "Zesty Roasted Potatoes"], ["CHEF'S TABLE", "Garlic Rosemary Cauliflower"],
+        ["SALAD & ANTIPASTI", "Tri-Color Quinoa"], ["SALAD & ANTIPASTI", "Saladu Nebbe"], ["SALAD & ANTIPASTI", "Ranch Tomato Salad"], ["SALAD & ANTIPASTI", "Watermelon Feta Salad"], ["SALAD & ANTIPASTI", "Papaya Salad"], ["SALAD & ANTIPASTI", "Buckwheat Soba Noodle Salad"],
+        ["HEARTH", "Nashville Hot Chicken Pizza"], ["HEARTH", "Crazy Caprese Pizza"], ["HEARTH", "Roasted Garlic Caprese Grilled Cheese"],
+        ["SEASONAL", "Crispy Spring Onion Chicken"], ["SEASONAL", "Edamame, Coriander, & Lime Rice"], ["SEASONAL", "Bell Pepper & Shitake Garlic Stir-Fry"], ["SEASONAL", "Papaya Salad"],
+        ["GRILL", "Marinated Grilled Chicken"], ["GRILL", "Crispy Fish Snack Wrap"], ["GRILL", "Tempura Avocado Fingers"],
+        ["SOUP", "Beef Chili"], ["SOUP", "Squash Bisque"],
+        ["SPECIALITY SANDWICHES", "Buffalo Chicken Wrap"], ["SPECIALITY SANDWICHES", "Club Sub"], ["SPECIALITY SANDWICHES", "Chickpea Caesar Wrap"]
+      ]
+    }
+  ]
+}

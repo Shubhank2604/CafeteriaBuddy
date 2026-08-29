@@ -1,0 +1,29 @@
+{
+  "dataset_version": 1,
+  "cases": 2,
+  "expected_items": 55,
+  "station_precision": 1.0,
+  "station_recall": 1.0,
+  "item_station_precision": 1.0,
+  "item_station_recall": 1.0,
+  "station_false_positives": 0,
+  "station_false_negatives": 0,
+  "item_false_positives": 0,
+  "item_false_negatives": 0,
+  "results": [
+    {
+      "id": "breakfast-layout-v1",
+      "expected_stations": 4,
+      "predicted_stations": 4,
+      "expected_items": 30,
+      "predicted_items": 30
+    },
+    {
+      "id": "lunch-layout-v1",
+      "expected_stations": 7,
+      "predicted_stations": 7,
+      "expected_items": 25,
+      "predicted_items": 25
+    }
+  ]
+}
