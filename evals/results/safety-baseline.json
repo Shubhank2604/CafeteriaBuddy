@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "cases": 36,
+  "positive_cases": 20,
+  "negative_cases": 16,
+  "true_positives": 20,
+  "false_positives": 8,
+  "false_negatives": 0,
+  "precision": 0.7143,
+  "recall": 1.0,
+  "notes": "The matcher is intentionally conservative. Remaining false positives include free-from names and ambiguous food names such as Butter Lettuce and Chicken of the Woods."
+}

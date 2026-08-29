@@ -160,6 +160,10 @@ npm run build
 
 GitHub Actions runs these checks for every pull request to `main`. The test configuration uses local providers and does not receive repository secrets.
 
+### Restriction-rule baseline
+
+The versioned 36-case benchmark reports `1.000` recall and `0.714` precision. The matcher intentionally favors recall, so ambiguous names can be conservatively excluded. See [the methodology and known false positives](docs/safety-evaluation.md). This evaluates rule matching, not medical safety or ingredient completeness.
+
 ## Project structure
 
 ```text
