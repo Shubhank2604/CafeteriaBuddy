@@ -5,9 +5,21 @@
 
 CafeteriaBuddy turns cafeteria menu images into structured breakfast and lunch menus, then gives each employee a personalized food score, plate ideas, and item-level recommendations.
 
-It combines a Next.js application with a Python extraction pipeline, Azure Document Intelligence for layout-aware OCR, Gemini for enrichment and optional recommendation polishing, and local SQLite storage. A deterministic, credential-free demo path lets reviewers run the complete product flow without cloud accounts.
+It combines a Next.js application with a Python extraction pipeline, Azure Document Intelligence for layout-aware OCR, Gemini for optional enrichment and recommendation copy, and local SQLite storage. Deterministic rules own allergy and hard-avoid decisions; Gemini cannot promote an excluded dish.
+
+Originally developed as **MealWorks** for MathWorks HackDay, the project placed **3rd among 39 teams and 90+ participants**. This repository extends that prototype with a credential-free demo, repeatable benchmarks, and CI.
 
 ![CafeteriaBuddy personalized food score](Food%20Score.png)
+
+## Measured baselines
+
+| Evaluation | Dataset | Result | What it establishes |
+| --- | --- | --- | --- |
+| Restriction rules | 36 labeled dish/restriction pairs | `1.000` recall, `0.714` precision | The conservative matcher caught every labeled conflict; eight ambiguous names were excluded unnecessarily |
+| Menu parser | 2 versioned layouts, 11 stations, 55 item/station labels | `1.000` precision and recall | The parser preserved every labeled station and dish assignment after fixture text extraction |
+| CI | Python tests, TypeScript tests, ESLint, parser gate, Next.js build | Runs without repository secrets | Core behavior and the production web build are checked on every pull request |
+
+These are regression baselines over versioned fixtures, not claims about medical safety, Azure OCR accuracy, or unseen menu layouts. The datasets, commands, and error analysis are documented in [restriction-rule evaluation](docs/safety-evaluation.md) and [menu parsing evaluation](docs/parsing-evaluation.md).
 
 ## What it does
 
@@ -38,22 +50,17 @@ It combines a Next.js application with a Python extraction pipeline, Azure Docum
 
 ## Architecture
 
-```text
-Admin upload
-    |
-    v
-Next.js API route
-    |
-    v
-Python menu bridge
-    |
-    +--> Azure Document Intelligence --> layout/item parser
-    |                                      |
-    |                                      v
-    +--> canonical food catalogue <---- structured menu
-                                           |
-                                           v
-Employee preferences --> safety rules --> personalized result --> Today UI
+```mermaid
+flowchart TD
+    A[Admin uploads menu image] --> B[Next.js API validates upload]
+    B --> C[Python processing bridge]
+    C --> D[Azure OCR or local fixture]
+    D --> E[Layout parser and food catalogue]
+    E --> F[Admin reviews extracted dishes]
+    F --> G[Deterministic matcher]
+    H[Employee preferences] --> G
+    G --> I[Optional Gemini copy polish]
+    I --> J[Personalized result]
 ```
 
 | Layer | Technology | Responsibility |
@@ -61,10 +68,19 @@ Employee preferences --> safety rules --> personalized result --> Today UI
 | Web application | Next.js 16, React 19 | UI, authentication, admin tools, API routes, feedback, and digests |
 | Extraction | Python, FastAPI, SQLModel | Image ingestion, OCR orchestration, parsing, catalogue resolution, and standalone APIs |
 | OCR | Azure Document Intelligence or local fixture | Layout-aware extraction in production; deterministic public demo and tests |
-| AI | Gemini or stub provider | Optional enrichment and recommendation copy polishing |
+| AI | Gemini or stub provider | Optional enrichment and recommendation copy; hard exclusions stay deterministic |
 | Storage | SQLite | Separate web and extraction/catalogue databases under `data/` |
 
 The web app invokes Python directly during menu uploads. You do not need to run the FastAPI server for normal use. See [the architecture notes](docs/architecture.md) for component boundaries, trade-offs, reliability limits, and the verification strategy.
+
+### Engineering decisions
+
+| Decision | Reason | Trade-off |
+| --- | --- | --- |
+| Deterministic safety rules before generation | Keeps allergy and explicit-avoid decisions inspectable and prevents the LLM from softening an exclusion | Conservative matching produces false positives that require cafe confirmation |
+| Administrator review before publication | Treats OCR output as a draft and gives operators a correction point | Adds a manual step to the upload workflow |
+| Provider adapters with local implementations | Makes the complete flow and CI reproducible without Azure or Gemini credentials | Local fixtures demonstrate orchestration and parsing, not general OCR quality |
+| SQLite for product and catalogue state | Keeps local setup small and the data easy to inspect | Targets a single-instance deployment rather than horizontal scaling |
 
 ## Credential-free demo
 
@@ -160,11 +176,11 @@ npm run build
 
 GitHub Actions runs these checks for every pull request to `main`. The test configuration uses local providers and does not receive repository secrets.
 
-### Restriction-rule baseline
+### Restriction-rule details
 
 The versioned 36-case benchmark reports `1.000` recall and `0.714` precision. The matcher intentionally favors recall, so ambiguous names can be conservatively excluded. See [the methodology and known false positives](docs/safety-evaluation.md). This evaluates rule matching, not medical safety or ingredient completeness.
 
-### Menu-parser baseline
+### Menu-parser details
 
 The deterministic parser correctly recovers all 11 station headings and all 55 item/station labels from the versioned breakfast and lunch fixture text. CI requires item/station recall of at least `0.98`. See [the parsing evaluation](docs/parsing-evaluation.md) for the dataset, command, and limitations. This measures parsing after text extraction; it does not measure Azure OCR accuracy or performance on unseen menu layouts.
 
@@ -182,14 +198,14 @@ tests/          Python pipeline test suite
 images/         Versioned OCR fixtures and date-based source menus
 ```
 
-## Data and safety
+## Safety boundary and deployment scope
 
 - `data/menu-match.db` stores web users, preferences, menus, matches, and feedback.
 - `data/apple_hill_cafe_bot.db` stores ingestions, occurrences, canonical foods, aliases, and enrichments.
 - Allergy and hard-avoid decisions are enforced by deterministic rules; Gemini cannot promote a hard-excluded dish.
 - `.env`, databases, OCR artifacts, uploaded runtime images, `.next`, virtual environments, and `node_modules` are excluded from Git.
 
-This is an MVP. Ingredient and allergen inference can be incomplete, so uncertain items are surfaced as cautions and should be confirmed with the cafe.
+The current evidence covers deterministic rule matching and parsing of two known menu layouts after text extraction. It does not validate ingredient completeness, medical safety, Azure OCR accuracy, or performance on unseen layouts. Uncertain items are surfaced as cautions and should be confirmed with the cafe.
 
 ## Contributing and security
 
